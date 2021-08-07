@@ -1,0 +1,9 @@
+img {
+  max-width: 100%;
+}
+
+.label {
+  background-color: lightcoral;
+  padding: 1.5em;
+  border-bottom: 1px solid black;
+}
