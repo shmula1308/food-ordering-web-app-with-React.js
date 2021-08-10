@@ -1,0 +1,44 @@
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.banner {
+  height: 15em;
+}
+
+.controls {
+  padding: 0 1em;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+}
+
+.textarea {
+  resize: vertical;
+  height: 120px;
+  min-height: 50px;
+  padding: 0.5em;
+  outline: none;
+  border: none;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+.input {
+  outline: none;
+  padding: 0.5em;
+  height: 50px;
+  font-size: 1.3rem;
+  border: none;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+.label {
+  margin: 1em 0 0.5em 0;
+}

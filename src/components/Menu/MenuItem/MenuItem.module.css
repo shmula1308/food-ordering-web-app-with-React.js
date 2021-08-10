@@ -1,0 +1,35 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em 0;
+  border-bottom: 1px solid lightgray;
+  cursor: pointer;
+}
+
+.item:hover,
+.item:focus {
+  background-color: #f1f1f1;
+}
+
+.content {
+  display: flex;
+}
+
+.summary {
+  margin-left: 1em;
+  align-self: center;
+}
+
+.summary h4 {
+  margin: 0;
+  margin-bottom: 0.3em;
+}
+
+.summary p {
+  margin: 0;
+}
+
+.price {
+  align-self: center;
+  margin-right: 1em;
+}

@@ -1,21 +1,25 @@
 import React from "react";
+import MenuItem from "./MenuItem/MenuItem";
 import classes from "./MenuCategory.module.css";
 
-const MenuCategory = (props) => {
+const MenuCategory = ({ label, mainImage, alt, items }) => {
   return (
     <div className={classes.category}>
       <details>
-        <summary className={classes.label}>{props.label}</summary>
+        <summary className={classes.label}>{label}</summary>
         <div className={`${classes["main-image"]}`}>
-          <img src={props.image} alt='Cherry-Cheesecake-with-Berry-Sauce' />
+          <img src={mainImage} alt={alt} />
         </div>
-        <ul>
-          <li>
-            <div className={classes.thumbnail}></div>
-          </li>
-          <li></li>
-          <li></li>
-          <li></li>
+        <ul className={classes.list}>
+          {items.map((item) => (
+            <MenuItem
+              key={item.id}
+              thumbnail={item.thumbnail}
+              title={item.title}
+              description={item.description}
+              price={item.price}
+            />
+          ))}
         </ul>
       </details>
     </div>
