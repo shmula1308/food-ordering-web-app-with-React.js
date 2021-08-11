@@ -1,0 +1,35 @@
+.button-content {
+  display: flex;
+}
+.button {
+  border: none;
+  width: 100%;
+  background-color: #ee8a18;
+  color: #fefefe;
+  font-weight: 800;
+  font-size: 1.2rem;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button-text {
+  width: 80%;
+  align-self: center;
+}
+
+.item-total {
+  width: 20%;
+  padding: 1em 0;
+}
+
+.separator {
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0,
+    rgba(0, 0, 0, 0.15) 49.76%,
+    rgba(0, 0, 0, 0.15) 50.24%,
+    transparent 100%
+  );
+}
