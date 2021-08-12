@@ -18,6 +18,22 @@
   z-index: 30;
 }
 
+.remove-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: -0.5em;
+  top: -0.5em;
+  width: 25px;
+  height: 25px;
+  background-color: #fff;
+  border-radius: 50%;
+  font-weight: 800;
+  cursor: pointer;
+  z-index: 40;
+}
+
 @media (min-width: 768px) {
   .modal {
     width: 40rem;

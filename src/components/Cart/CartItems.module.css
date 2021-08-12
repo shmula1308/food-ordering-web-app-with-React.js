@@ -1,0 +1,7 @@
+.cart-items {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  padding: 0.5em 1em;
+  border-bottom: 1px solid #cccccc;
+}

@@ -3,17 +3,6 @@
   overflow: scroll;
 }
 
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
-}
-
-.banner {
-  height: 15em;
-}
-
 .description {
   padding: 0 1em;
   font-size: 1rem;

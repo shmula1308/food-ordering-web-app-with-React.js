@@ -60,6 +60,7 @@ const Menu = (props) => {
           label={section.label}
           items={section.items}
           alt={section.alt}
+          onShow={props.onShow}
         />
       ))}
     </div>
