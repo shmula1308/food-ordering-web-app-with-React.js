@@ -1,27 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import Modal from "../../UI/Modal";
-import ItemExtraImg from "../../../assets/Chocolate-Chip-Cookies-medium.jpeg";
-import ItemOptions from "./ItemOptions";
+import ItemOptionsCategories from "./ItemOptionsCategories";
 import ItemSpecialInstructions from "./ItemSpecialInstructions";
 import Input from "../../UI/Input";
 import Button from "../../UI/Button";
 import Header from "../../Header/Header";
+import CartContext from "../../../store/cart-context";
 import classes from "./ItemExtras.module.css";
 
 const ItemExtras = (props) => {
+  const cartCtx = useContext(CartContext);
   return (
     <Modal onClose={props.onClose}>
       <div className={classes.item}>
         <form>
-          <Header image={ItemExtraImg} />
-          <p className={classes.description}>Fusilli pasta, plum tomatoes, garlic, goat cheese and basil</p>
+          <Header image={cartCtx.itemToDisplay.mediumSizeImage} />
+          <p className={classes.description}>{cartCtx.itemToDisplay.description}</p>
           <div className={classes.controls}>
-            <ItemOptions />
+            <ItemOptionsCategories />
             <ItemSpecialInstructions />
             <Input />
           </div>
           <div className={classes.actions}>
-            <Button type='submit'>Add to cart</Button>
+            <Button type='submit' price={cartCtx.itemToDisplay.price}>
+              Add to cart
+            </Button>
           </div>
         </form>
       </div>

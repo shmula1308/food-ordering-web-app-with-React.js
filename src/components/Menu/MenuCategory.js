@@ -2,7 +2,8 @@ import React from "react";
 import MenuItem from "./MenuItem/MenuItem";
 import classes from "./MenuCategory.module.css";
 
-const MenuCategory = ({ label, mainImage, alt, items, onShow }) => {
+const MenuCategory = (props) => {
+  const { label, mainImage, alt, items, onShow, onDisplayItem, sectionId } = props;
   return (
     <div className={classes.category}>
       <details>
@@ -15,11 +16,16 @@ const MenuCategory = ({ label, mainImage, alt, items, onShow }) => {
             <MenuItem
               key={item.id}
               thumbnail={item.thumbnail}
+              mediumSizeImage={item.mediumSizeImage}
               title={item.title}
               description={item.description}
               price={item.price}
-              id={item.id}
+              itemId={item.id}
+              sectionId={sectionId}
+              extrasID={item.extrasID}
+              alt={item.alt}
               onShow={onShow}
+              onDisplayItem={onDisplayItem}
             />
           ))}
         </ul>

@@ -1,15 +1,19 @@
 import React from "react";
+
 import classes from "./MenuItem.module.css";
 
-const MenuItem = ({ thumbnail, title, description, price, alt, id, onShow }) => {
+const MenuItem = (props) => {
+  const { thumbnail, title, description, price, alt, itemId, onShow, sectionId, onDisplayItem } = props;
+
   const formatedPrice = `$${price.toFixed(2)}`;
 
-  // const clickHandler = (id) => {
-  //   console.log("hi", id);
-  // };
+  const displayItemHandler = () => {
+    onShow();
+    onDisplayItem(sectionId, itemId);
+  };
 
   return (
-    <li className={classes.item} onClick={onShow.bind(null, id)}>
+    <li className={classes.item} onClick={displayItemHandler}>
       <div className={classes.content}>
         <img src={thumbnail} alt={alt} />
         <div className={classes.summary}>

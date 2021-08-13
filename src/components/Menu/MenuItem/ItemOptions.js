@@ -1,7 +1,7 @@
-import React from "react";
-import classes from "./ItemsOptions.module.css";
+import React, { Fragment } from "react";
+import classes from "./ItemOptions.module.css";
 
-const ItemExtras = (props) => {
+const ItemOptions = (props) => {
   return (
     <div className={classes["item-options"]}>
       <span className={classes.category}>Toppings</span>
@@ -32,4 +32,4 @@ const ItemExtras = (props) => {
   );
 };
 
-export default ItemExtras;
+export default ItemOptions;
