@@ -1,5 +1,6 @@
 .item {
-  max-height: 700px;
+  position: relative;
+  max-height: 600px;
   overflow: scroll;
 }
 

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import Modal from "../../UI/Modal";
 import ItemOptionsCategories from "./ItemOptionsCategories";
 import ItemSpecialInstructions from "./ItemSpecialInstructions";
@@ -10,14 +10,17 @@ import classes from "./ItemExtras.module.css";
 
 const ItemExtras = (props) => {
   const cartCtx = useContext(CartContext);
+
+  const checkBoxHandler = (price) => {};
+
   return (
     <Modal onClose={props.onClose}>
       <div className={classes.item}>
         <form>
-          <Header image={cartCtx.itemToDisplay.mediumSizeImage} />
+          <Header image={cartCtx.itemToDisplay.mediumSizeImage} alt={cartCtx.itemToDisplay.alt} />
           <p className={classes.description}>{cartCtx.itemToDisplay.description}</p>
           <div className={classes.controls}>
-            <ItemOptionsCategories />
+            <ItemOptionsCategories onSelectCheckbox={checkBoxHandler} />
             <ItemSpecialInstructions />
             <Input />
           </div>

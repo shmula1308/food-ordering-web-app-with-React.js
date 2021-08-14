@@ -1,5 +1,6 @@
 import React from "react";
 import MenuItem from "./MenuItem/MenuItem";
+import Header from "../Header/Header";
 import classes from "./MenuCategory.module.css";
 
 const MenuCategory = (props) => {
@@ -8,9 +9,7 @@ const MenuCategory = (props) => {
     <div className={classes.category}>
       <details>
         <summary className={classes.label}>{label}</summary>
-        <div className={`${classes["main-image"]}`}>
-          <img src={mainImage} alt={alt} />
-        </div>
+        <Header image={mainImage} alt={alt} />
         <ul className={classes.list}>
           {items.map((item) => (
             <MenuItem
