@@ -22,6 +22,7 @@ const DUMMY_DATA = [
         pizzaToppings: false,
         pizzaCrust: false,
         specialInstruction: true,
+        amount: 1,
         price: 5,
       },
       {
@@ -36,6 +37,7 @@ const DUMMY_DATA = [
         pizzaToppings: false,
         pizzaCrust: false,
         specialInstruction: true,
+        amount: 1,
         price: 8,
       },
       {
@@ -50,6 +52,7 @@ const DUMMY_DATA = [
         pizzaToppings: false,
         pizzaCrust: false,
         specialInstruction: true,
+        amount: 1,
         price: 7.5,
       },
       {
@@ -64,7 +67,7 @@ const DUMMY_DATA = [
         pizzaToppings: false,
         pizzaCrust: false,
         specialInstruction: true,
-
+        amount: 1,
         price: 6,
       },
     ],
@@ -88,6 +91,7 @@ const DUMMY_DATA = [
         pizzaToppings: true,
         pizzaCrust: true,
         specialInstruction: true,
+        amount: 1,
         price: 8,
       },
       {
@@ -102,6 +106,7 @@ const DUMMY_DATA = [
         pizzaToppings: true,
         pizzaCrust: true,
         specialInstruction: true,
+        amount: 1,
         price: 8,
       },
       {
@@ -116,6 +121,7 @@ const DUMMY_DATA = [
         pizzaToppings: true,
         pizzaCrust: true,
         specialInstruction: true,
+        amount: 1,
         price: 9,
       },
       {
@@ -131,6 +137,7 @@ const DUMMY_DATA = [
         pizzaToppings: true,
         pizzaCrust: true,
         specialInstruction: true,
+        amount: 1,
         price: 11,
       },
       {
@@ -145,6 +152,7 @@ const DUMMY_DATA = [
         pizzaToppings: true,
         pizzaCrust: true,
         specialInstruction: true,
+        amount: 1,
         price: 8,
       },
     ],
@@ -155,8 +163,8 @@ const Menu = (props) => {
   const cartCtx = useContext(CartContext);
 
   const displayItemHandler = (sectionId, itemId) => {
-    const category = DUMMY_DATA.filter((category) => category.sectionId === sectionId)[0];
-    const item = category.items.filter((item) => item.id === itemId)[0];
+    const category = DUMMY_DATA.filter((category) => category.sectionId === sectionId);
+    const item = category[0].items.filter((item) => item.id === itemId)[0];
     cartCtx.displayItem(item);
   };
 

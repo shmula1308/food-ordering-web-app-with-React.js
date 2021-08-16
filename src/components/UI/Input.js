@@ -13,6 +13,7 @@ const Input = (props) => {
         max='99'
         step='1'
         id={"amount_ " + props.id}
+        onChange={props.onAmountChange}
       />
     </div>
   );

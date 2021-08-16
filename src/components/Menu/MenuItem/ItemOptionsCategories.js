@@ -9,10 +9,10 @@ const ItemOptionsCategories = (props) => {
   const cartCtx = useContext(CartContext);
   return (
     <React.Fragment>
-      {cartCtx.itemToDisplay.environmentalFee && <ItemsFees />}
-      {cartCtx.itemToDisplay.pizzaSize && <PizzaSize onSelectCheckbox={props.onSelectCheckbox} />}
-      {cartCtx.itemToDisplay.pizzaToppings && <PizzaToppings onSelectCheckbox={props.onSelectCheckbox} />}
-      {cartCtx.itemToDisplay.pizzaCrust && <PizzaCrust onSelectCheckbox={props.onSelectCheckbox} />}
+      {cartCtx.selectedMenuItem.environmentalFee && <ItemsFees />}
+      {cartCtx.selectedMenuItem.pizzaSize && <PizzaSize onSelectCheckbox={props.onSelectCheckbox} />}
+      {cartCtx.selectedMenuItem.pizzaToppings && <PizzaToppings onSelectCheckbox={props.onSelectCheckbox} />}
+      {cartCtx.selectedMenuItem.pizzaCrust && <PizzaCrust onSelectCheckbox={props.onSelectCheckbox} />}
     </React.Fragment>
   );
 };

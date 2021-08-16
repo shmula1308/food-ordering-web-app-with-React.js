@@ -11,21 +11,36 @@ import classes from "./ItemExtras.module.css";
 const ItemExtras = (props) => {
   const cartCtx = useContext(CartContext);
 
-  const checkBoxHandler = (price) => {};
+  const itemPrice = cartCtx.priceTotal;
+  console.log(itemPrice);
+
+  const checkBoxHandler = (ev) => {
+    let itemExtraPrice;
+    if (ev.target.checked) {
+      itemExtraPrice = Number(ev.target.value);
+    } else {
+      itemExtraPrice = -Number(ev.target.value);
+    }
+    cartCtx.itemExtras(itemExtraPrice);
+  };
+
+  const itemAmountHandler = (ev) => {
+    cartCtx.itemAmount(ev.target.value);
+  };
 
   return (
     <Modal onClose={props.onClose}>
       <div className={classes.item}>
         <form>
-          <Header image={cartCtx.itemToDisplay.mediumSizeImage} alt={cartCtx.itemToDisplay.alt} />
-          <p className={classes.description}>{cartCtx.itemToDisplay.description}</p>
+          <Header image={cartCtx.selectedMenuItem.mediumSizeImage} alt={cartCtx.selectedMenuItem.alt} />
+          <p className={classes.description}>{cartCtx.selectedMenuItem.description}</p>
           <div className={classes.controls}>
             <ItemOptionsCategories onSelectCheckbox={checkBoxHandler} />
             <ItemSpecialInstructions />
-            <Input />
+            <Input onAmountChange={itemAmountHandler} />
           </div>
           <div className={classes.actions}>
-            <Button type='submit' price={cartCtx.itemToDisplay.price}>
+            <Button type='submit' price={itemPrice}>
               Add to cart
             </Button>
           </div>

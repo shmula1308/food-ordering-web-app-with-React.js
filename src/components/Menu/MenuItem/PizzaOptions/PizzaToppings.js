@@ -8,42 +8,42 @@ const PizzaToppings = (props) => {
       <div className={classes["options-container"]}>
         <label>
           <div className={classes["options-control"]}>
-            <input type='checkbox' />
+            <input type='checkbox' onChange={props.onSelectCheckbox} value='1.2' />
             <span className={classes.option}>Corn</span>
           </div>
           <span className={classes["option-price"]}>$1.20</span>
         </label>
         <label>
           <div className={classes["options-control"]}>
-            <input type='checkbox' />
+            <input type='checkbox' onChange={props.onSelectCheckbox} value='1.2' />
             <span className={classes.option}>Olives</span>
           </div>
           <span className={classes["option-price"]}>$1.20</span>
         </label>
         <label>
           <div className={classes["options-control"]}>
-            <input type='checkbox' />
+            <input type='checkbox' onChange={props.onSelectCheckbox} value='1.2' />
             <span className={classes.option}>Mozzarella</span>
           </div>
           <span className={classes["option-price"]}>$1.20</span>
         </label>
         <label>
           <div className={classes["options-control"]}>
-            <input type='checkbox' />
+            <input type='checkbox' onChange={props.onSelectCheckbox} value='1.2' />
             <span className={classes.option}>Mushrooms</span>
           </div>
           <span className={classes["option-price"]}>$1.20</span>
         </label>
         <label>
           <div className={classes["options-control"]}>
-            <input type='checkbox' />
+            <input type='checkbox' onChange={props.onSelectCheckbox} value='1.2' />
             <span className={classes.option}>Ham</span>
           </div>
           <span className={classes["option-price"]}>$1.20</span>
         </label>
         <label>
           <div className={classes["options-control"]}>
-            <input type='checkbox' />
+            <input type='checkbox' onChange={props.onSelectCheckbox} value='1.2' />
             <span className={classes.option}>Salami</span>
           </div>
           <span className={classes["option-price"]}>$1.20</span>
