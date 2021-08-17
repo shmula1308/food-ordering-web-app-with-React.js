@@ -6,7 +6,8 @@ const defaultCartState = {
   selectedMenuItem: null,
   itemBasePrice: null,
   extraCharges: 0,
-  pizzaSize: "small",
+  pizzaSize: "Small",
+  pizzaCrust: "Thick",
   itemAmount: 1,
   priceTotal: null,
 };
@@ -44,21 +45,41 @@ const cartReducer = (state, action) => {
   }
   if (action.type === "pizzaSize") {
     const updatedPizzaSize = action.pizzaSize;
-
-    return {
-      ...state,
-      pizzaSize: updatedPizzaSize,
-    };
-  }
-
-  if (action.type === "resetExtras") {
-    console.log(action.pizzaSize);
-    const updatedExtraCharges = 2;
+    const updatedExtraCharges = updatedPizzaSize === "Large" ? 2 : 0;
     const updatedPriceTotal = state.itemAmount * (state.itemBasePrice + updatedExtraCharges);
     return {
       ...state,
-      extraCharges: 0,
+      pizzaSize: updatedPizzaSize,
       priceTotal: updatedPriceTotal,
+      extraCharges: updatedExtraCharges,
+    };
+  }
+  if (action.type === "CRUST") {
+    const updatedPizzaCrust = action.pizzaCrust;
+    console.log(updatedPizzaCrust);
+    return {
+      ...state,
+      pizzaCrust: updatedPizzaCrust,
+    };
+  }
+  if (action.type === "ADD") {
+    const specialInstructions = action.item.specialInstructions.trim();
+    const newCartItem = {
+      title: state.selectedMenuItem.title,
+      amount: state.itemAmount,
+      price: state.priceTotal.toFixed(2),
+      pizzaSize: state.pizzaSize,
+      pizzaCrust: state.pizzaCrust,
+      pizzaToppings: action.item.pizzaToppings,
+      specialInstructions: specialInstructions,
+    };
+
+    const updateCartItems = state.items.concat(newCartItem);
+    console.log(updateCartItems);
+
+    return {
+      ...state,
+      items: updateCartItems,
     };
   }
   return defaultCartState;
@@ -72,11 +93,8 @@ const CartProvider = (props) => {
   };
 
   const itemExtrasHandler = (extraCharge) => {
+    console.log(extraCharge);
     dispatchCartAction({ type: "extras", extraCharge: extraCharge });
-  };
-
-  const resetItemExtrasHandler = (pizzaSize) => {
-    dispatchCartAction({ type: "resetExtras", pizzaSize: pizzaSize });
   };
 
   const itemAmountHandler = (itemAmount) => {
@@ -86,18 +104,26 @@ const CartProvider = (props) => {
   const pizzaSizeHandler = (pizzaSize) => {
     dispatchCartAction({ type: "pizzaSize", pizzaSize: pizzaSize });
   };
+  const pizzaCrustHandler = (crust) => {
+    dispatchCartAction({ type: "CRUST", pizzaCrust: crust });
+  };
+
+  const addItemToCartHandler = (item) => {
+    dispatchCartAction({ type: "ADD", item: item });
+  };
 
   const cartContext = {
-    items: [],
+    items: cartState.items,
     selectedMenuItem: cartState.selectedMenuItem,
     itemBasePrice: cartState.itemBasePrice,
     priceTotal: cartState.priceTotal,
     itemExtras: itemExtrasHandler,
-    resetItemExtras: resetItemExtrasHandler,
     pizzaSize: cartState.pizzaSize,
     changePizzaSize: pizzaSizeHandler,
+    changePizzaCrust: pizzaCrustHandler,
     itemAmount: itemAmountHandler,
     displayItem: displayItemExtrasHandler,
+    addItem: addItemToCartHandler,
   };
 
   return <CartContext.Provider value={cartContext}>{props.children}</CartContext.Provider>;

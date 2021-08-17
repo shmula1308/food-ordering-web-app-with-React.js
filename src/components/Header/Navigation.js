@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./Navigation.module.css";
+import CartContext from "../../store/cart-context";
 import { MdShoppingCart } from "react-icons/md";
 import { MdRestaurantMenu } from "react-icons/md";
 import { useEffect, useState } from "react";
 
 const Navigation = (props) => {
   const [opaque, setOpaque] = useState(false);
-
+  const cartCtx = useContext(CartContext);
+  const numberOfItemsInCart = cartCtx.items.length;
+  console.log(cartCtx.items);
   useEffect(() => {
     window.addEventListener("scroll", () => {
       setOpaque(window.pageYOffset > 200);
@@ -21,7 +24,7 @@ const Navigation = (props) => {
           <MdRestaurantMenu className={classes.icon} />
         </button>
         <button className={classes.button}>
-          <span className={`${classes.badge} ${classes.bounceIn}`}>13</span>
+          <span className={`${classes.badge} ${classes.bounceIn}`}>{numberOfItemsInCart}</span>
           <MdShoppingCart className={classes.icon} />
         </button>
       </div>

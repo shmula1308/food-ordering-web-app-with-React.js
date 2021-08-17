@@ -24,7 +24,7 @@ function App() {
         <Navigation />
         <Header image={headerImage} />
         <Menu onShow={showItemExtrasHandler} />
-        {/* <Cart /> */}
+        <Cart />
         {extrasIsShown && <ItemExtras onClose={hideItemExtrasHandler} />}
       </div>
     </CartProvider>

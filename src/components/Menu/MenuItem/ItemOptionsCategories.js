@@ -10,7 +10,7 @@ const ItemOptionsCategories = (props) => {
   return (
     <React.Fragment>
       {cartCtx.selectedMenuItem.environmentalFee && <ItemsFees />}
-      {cartCtx.selectedMenuItem.pizzaSize && <PizzaSize onSelectCheckbox={props.onSelectCheckbox} />}
+      {cartCtx.selectedMenuItem.pizzaSize && <PizzaSize onPizzaSizeChange={props.onPizzaSizeChange} />}
       {cartCtx.selectedMenuItem.pizzaToppings && (
         <PizzaToppings
           selectedCheckBoxes={props.selectedCheckBoxes}
@@ -19,7 +19,7 @@ const ItemOptionsCategories = (props) => {
           onClick={props.onClick}
         />
       )}
-      {cartCtx.selectedMenuItem.pizzaCrust && <PizzaCrust onSelectCheckbox={props.onSelectCheckbox} />}
+      {cartCtx.selectedMenuItem.pizzaCrust && <PizzaCrust onSelectCrust={props.onSelectCrust} />}
     </React.Fragment>
   );
 };

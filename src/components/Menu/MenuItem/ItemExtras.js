@@ -10,7 +10,7 @@ import classes from "./ItemExtras.module.css";
 
 const ItemExtras = (props) => {
   const cartCtx = useContext(CartContext);
-
+  const [specialInstructions, setSpecialInstructions] = useState("");
   const [pizzaToppingsCheckbox, setPizzaToppingsCheckbox] = useState({
     corn: false,
     olives: false,
@@ -31,18 +31,9 @@ const ItemExtras = (props) => {
     });
   }, [cartCtx.pizzaSize]);
 
-  const itemPrice = cartCtx.priceTotal;
+  const priceTotal = cartCtx.priceTotal;
 
   const checkBoxHandler = (ev) => {
-    if (ev.target.dataset.size === "large") {
-      cartCtx.changePizzaSize("large");
-      cartCtx.resetItemExtras("large");
-    }
-    if (ev.target.dataset.size === "small") {
-      cartCtx.changePizzaSize("small");
-      cartCtx.resetItemExtras("small");
-    }
-
     let itemExtraPrice;
 
     if (ev.target.checked) {
@@ -51,6 +42,10 @@ const ItemExtras = (props) => {
       itemExtraPrice = -Number(ev.target.value);
     }
     cartCtx.itemExtras(itemExtraPrice);
+  };
+
+  const pizzaSizeHandler = (size) => {
+    cartCtx.changePizzaSize(size);
   };
 
   const itemAmountHandler = (ev) => {
@@ -65,23 +60,45 @@ const ItemExtras = (props) => {
     });
   };
 
+  const pizzaCrustHandler = (crust) => {
+    cartCtx.changePizzaCrust(crust);
+  };
+
+  const textInputHandler = (ev) => {
+    const specialInstructions = ev.target.value;
+    setSpecialInstructions(specialInstructions);
+  };
+
+  const addItemToCartHandler = (ev) => {
+    ev.preventDefault();
+    props.onClose();
+
+    const cartItem = {
+      pizzaToppings: pizzaToppingsCheckbox,
+      specialInstructions: specialInstructions,
+    };
+    cartCtx.addItem(cartItem);
+  };
+
   return (
     <Modal onClose={props.onClose}>
       <div className={classes.item}>
-        <form>
+        <form onSubmit={addItemToCartHandler}>
           <Header image={cartCtx.selectedMenuItem.mediumSizeImage} alt={cartCtx.selectedMenuItem.alt} />
           <p className={classes.description}>{cartCtx.selectedMenuItem.description}</p>
           <div className={classes.controls}>
             <ItemOptionsCategories
               onClick={pizzaToppingsHandler}
               pizzaToppings={pizzaToppingsCheckbox}
+              onPizzaSizeChange={pizzaSizeHandler}
               onSelectCheckbox={checkBoxHandler}
+              onSelectCrust={pizzaCrustHandler}
             />
-            <ItemSpecialInstructions />
+            <ItemSpecialInstructions onTextInput={textInputHandler} />
             <Input onAmountChange={itemAmountHandler} />
           </div>
           <div className={classes.actions}>
-            <Button type='submit' price={itemPrice}>
+            <Button type='submit' price={priceTotal}>
               Add to cart
             </Button>
           </div>

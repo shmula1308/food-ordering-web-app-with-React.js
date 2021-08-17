@@ -8,6 +8,7 @@ const CartContext = React.createContext({
   itemExtras: () => {},
   pizzaSize: "small",
   changePizzaSize: () => {},
+  changePizzaCrust: () => {},
   itemAmount: () => {},
   addItem: () => {},
   removeItem: () => {},

@@ -8,14 +8,19 @@ const PizzaCrust = (props) => {
       <div className={classes["options-container"]}>
         <label>
           <div className={classes["options-control"]}>
-            <input type='radio' defaultChecked name='crust' />
+            <input
+              type='radio'
+              name='crust'
+              defaultChecked
+              onChange={props.onSelectCrust.bind(null, "thick")}
+            />
             <span className={classes.option}>Thick</span>
           </div>
           <span className={classes["option-price"]}></span>
         </label>
         <label>
           <div className={classes["options-control"]}>
-            <input type='radio' name='crust' />
+            <input type='radio' name='crust' onChange={props.onSelectCrust.bind(null, "crispy")} />
             <span className={classes.option}>Crispy</span>
           </div>
           <span className={classes["option-price"]}></span>
