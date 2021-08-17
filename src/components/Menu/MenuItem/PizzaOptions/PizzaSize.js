@@ -8,14 +8,21 @@ const PizzaSize = (props) => {
       <div className={classes["options-container"]}>
         <label>
           <div className={classes["options-control"]}>
-            <input type='radio' defaultChecked name='size' onChange={props.onSelectCheckbox} value='-2' />
+            <input
+              type='radio'
+              name='size'
+              onChange={props.onSelectCheckbox}
+              value='-2'
+              data-size='small'
+              defaultChecked
+            />
             <span className={classes.option}>Small</span>
           </div>
           <span className={classes["option-price"]}></span>
         </label>
         <label>
           <div className={classes["options-control"]}>
-            <input type='radio' name='size' onChange={props.onSelectCheckbox} value='2' />
+            <input type='radio' name='size' onChange={props.onSelectCheckbox} value='2' data-size='large' />
             <span className={classes.option}>Large</span>
           </div>
           <span className={classes["option-price"]}>+2.00</span>

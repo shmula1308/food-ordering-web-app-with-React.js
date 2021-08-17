@@ -11,7 +11,14 @@ const ItemOptionsCategories = (props) => {
     <React.Fragment>
       {cartCtx.selectedMenuItem.environmentalFee && <ItemsFees />}
       {cartCtx.selectedMenuItem.pizzaSize && <PizzaSize onSelectCheckbox={props.onSelectCheckbox} />}
-      {cartCtx.selectedMenuItem.pizzaToppings && <PizzaToppings onSelectCheckbox={props.onSelectCheckbox} />}
+      {cartCtx.selectedMenuItem.pizzaToppings && (
+        <PizzaToppings
+          selectedCheckBoxes={props.selectedCheckBoxes}
+          onSelectCheckbox={props.onSelectCheckbox}
+          pizzaToppings={props.pizzaToppings}
+          onClick={props.onClick}
+        />
+      )}
       {cartCtx.selectedMenuItem.pizzaCrust && <PizzaCrust onSelectCheckbox={props.onSelectCheckbox} />}
     </React.Fragment>
   );

@@ -13,7 +13,7 @@ const Cart = (props) => {
         <CartItems />
         <CartFooter />
       </div>
-      <Button>Go to Checkout</Button>
+      {/* <Button>Go to Checkout</Button> */}
     </form>
   );
 };

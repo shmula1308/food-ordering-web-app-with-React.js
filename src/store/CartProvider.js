@@ -6,6 +6,7 @@ const defaultCartState = {
   selectedMenuItem: null,
   itemBasePrice: null,
   extraCharges: 0,
+  pizzaSize: "small",
   itemAmount: 1,
   priceTotal: null,
 };
@@ -41,13 +42,32 @@ const cartReducer = (state, action) => {
       priceTotal: updatedPriceTotal,
     };
   }
+  if (action.type === "pizzaSize") {
+    const updatedPizzaSize = action.pizzaSize;
+
+    return {
+      ...state,
+      pizzaSize: updatedPizzaSize,
+    };
+  }
+
+  if (action.type === "resetExtras") {
+    console.log(action.pizzaSize);
+    const updatedExtraCharges = 2;
+    const updatedPriceTotal = state.itemAmount * (state.itemBasePrice + updatedExtraCharges);
+    return {
+      ...state,
+      extraCharges: 0,
+      priceTotal: updatedPriceTotal,
+    };
+  }
   return defaultCartState;
 };
 
 const CartProvider = (props) => {
   const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
 
-  const displayItemExtras = (item) => {
+  const displayItemExtrasHandler = (item) => {
     dispatchCartAction({ type: "displayItem", item: item });
   };
 
@@ -55,17 +75,29 @@ const CartProvider = (props) => {
     dispatchCartAction({ type: "extras", extraCharge: extraCharge });
   };
 
+  const resetItemExtrasHandler = (pizzaSize) => {
+    dispatchCartAction({ type: "resetExtras", pizzaSize: pizzaSize });
+  };
+
   const itemAmountHandler = (itemAmount) => {
     dispatchCartAction({ type: "amount", itemAmount: itemAmount });
   };
 
+  const pizzaSizeHandler = (pizzaSize) => {
+    dispatchCartAction({ type: "pizzaSize", pizzaSize: pizzaSize });
+  };
+
   const cartContext = {
+    items: [],
     selectedMenuItem: cartState.selectedMenuItem,
     itemBasePrice: cartState.itemBasePrice,
     priceTotal: cartState.priceTotal,
     itemExtras: itemExtrasHandler,
+    resetItemExtras: resetItemExtrasHandler,
+    pizzaSize: cartState.pizzaSize,
+    changePizzaSize: pizzaSizeHandler,
     itemAmount: itemAmountHandler,
-    displayItem: displayItemExtras,
+    displayItem: displayItemExtrasHandler,
   };
 
   return <CartContext.Provider value={cartContext}>{props.children}</CartContext.Provider>;
