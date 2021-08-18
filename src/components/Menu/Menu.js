@@ -24,6 +24,7 @@ const DUMMY_DATA = [
         specialInstruction: true,
         amount: 1,
         price: 5,
+        category: "dessert",
       },
       {
         id: "item2",
@@ -39,6 +40,7 @@ const DUMMY_DATA = [
         specialInstruction: true,
         amount: 1,
         price: 8,
+        category: "dessert",
       },
       {
         id: "item3",
@@ -54,6 +56,7 @@ const DUMMY_DATA = [
         specialInstruction: true,
         amount: 1,
         price: 7.5,
+        category: "dessert",
       },
       {
         id: "item4",
@@ -69,6 +72,7 @@ const DUMMY_DATA = [
         specialInstruction: true,
         amount: 1,
         price: 6,
+        category: "dessert",
       },
     ],
   },
@@ -93,6 +97,7 @@ const DUMMY_DATA = [
         specialInstruction: true,
         amount: 1,
         price: 8,
+        category: "pizza",
       },
       {
         id: "item2",
@@ -108,6 +113,7 @@ const DUMMY_DATA = [
         specialInstruction: true,
         amount: 1,
         price: 8,
+        category: "pizza",
       },
       {
         id: "item3",
@@ -123,6 +129,7 @@ const DUMMY_DATA = [
         specialInstruction: true,
         amount: 1,
         price: 9,
+        category: "pizza",
       },
       {
         id: "item4",
@@ -139,6 +146,7 @@ const DUMMY_DATA = [
         specialInstruction: true,
         amount: 1,
         price: 11,
+        category: "pizza",
       },
       {
         id: "item5",
@@ -154,6 +162,7 @@ const DUMMY_DATA = [
         specialInstruction: true,
         amount: 1,
         price: 8,
+        category: "pizza",
       },
     ],
   },

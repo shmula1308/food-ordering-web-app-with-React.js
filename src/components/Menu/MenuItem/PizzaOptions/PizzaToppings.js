@@ -20,7 +20,7 @@ const PizzaToppings = (props) => {
               onChange={props.onSelectCheckbox}
               value={pizzaToppingsPrice}
               data-item='corn'
-              checked={props.pizzaToppings.corn}
+              checked={cartCtx.pizzaToppings.corn}
               onClick={props.onClick}
             />
             <span className={classes.option}>Corn</span>
@@ -34,7 +34,7 @@ const PizzaToppings = (props) => {
               onChange={props.onSelectCheckbox}
               value={pizzaToppingsPrice}
               data-item='olives'
-              checked={props.pizzaToppings.olives}
+              checked={cartCtx.pizzaToppings.olives}
               onClick={props.onClick}
             />
             <span className={classes.option}>Olives</span>
@@ -48,7 +48,7 @@ const PizzaToppings = (props) => {
               onChange={props.onSelectCheckbox}
               value={pizzaToppingsPrice}
               data-item='mozzarella'
-              checked={props.pizzaToppings.mozzarella}
+              checked={cartCtx.pizzaToppings.mozzarella}
               onClick={props.onClick}
             />
             <span className={classes.option}>Mozzarella</span>
@@ -62,7 +62,7 @@ const PizzaToppings = (props) => {
               onChange={props.onSelectCheckbox}
               value={pizzaToppingsPrice}
               data-item='mushrooms'
-              checked={props.pizzaToppings.mushrooms}
+              checked={cartCtx.pizzaToppings.mushrooms}
               onClick={props.onClick}
             />
             <span className={classes.option}>Mushrooms</span>
@@ -76,7 +76,7 @@ const PizzaToppings = (props) => {
               onChange={props.onSelectCheckbox}
               value={pizzaToppingsPrice}
               data-item='ham'
-              checked={props.pizzaToppings.ham}
+              checked={cartCtx.pizzaToppings.ham}
               onClick={props.onClick}
             />
             <span className={classes.option}>Ham</span>
@@ -90,7 +90,7 @@ const PizzaToppings = (props) => {
               onChange={props.onSelectCheckbox}
               value={pizzaToppingsPrice}
               data-item='salami'
-              checked={props.pizzaToppings.salami}
+              checked={cartCtx.pizzaToppings.salami}
               onClick={props.onClick}
             />
             <span className={classes.option}>Salami</span>

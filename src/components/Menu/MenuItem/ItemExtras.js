@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Modal from "../../UI/Modal";
 import ItemOptionsCategories from "./ItemOptionsCategories";
 import ItemSpecialInstructions from "./ItemSpecialInstructions";
@@ -10,28 +10,13 @@ import classes from "./ItemExtras.module.css";
 
 const ItemExtras = (props) => {
   const cartCtx = useContext(CartContext);
-  const [specialInstructions, setSpecialInstructions] = useState("");
-  const [pizzaToppingsCheckbox, setPizzaToppingsCheckbox] = useState({
-    corn: false,
-    olives: false,
-    mozzarella: false,
-    mushrooms: false,
-    ham: false,
-    salami: false,
-  });
+  const priceTotal = cartCtx.priceTotal;
+
+  const { pizzaSize, resetPizzaToppings } = cartCtx;
 
   useEffect(() => {
-    setPizzaToppingsCheckbox({
-      corn: false,
-      olives: false,
-      mozzarella: false,
-      mushrooms: false,
-      ham: false,
-      salami: false,
-    });
-  }, [cartCtx.pizzaSize]);
-
-  const priceTotal = cartCtx.priceTotal;
+    resetPizzaToppings();
+  }, [pizzaSize]);
 
   const checkBoxHandler = (ev) => {
     let itemExtraPrice;
@@ -53,31 +38,29 @@ const ItemExtras = (props) => {
   };
 
   const pizzaToppingsHandler = (ev) => {
-    const clickedTopping = ev.target.dataset.item;
-    setPizzaToppingsCheckbox({
-      ...pizzaToppingsCheckbox,
-      [clickedTopping]: ev.target.checked,
-    });
+    const topping = ev.target.dataset.item;
+    const pizzaTopping = {
+      toppingName: topping,
+      isSelected: ev.target.checked,
+    };
+    cartCtx.addPizzaToppings(pizzaTopping);
   };
 
   const pizzaCrustHandler = (crust) => {
     cartCtx.changePizzaCrust(crust);
   };
 
-  const textInputHandler = (ev) => {
+  const sepcialInstructionsHandler = (ev) => {
     const specialInstructions = ev.target.value;
-    setSpecialInstructions(specialInstructions);
+    cartCtx.addSpecialInstructions(specialInstructions);
   };
 
   const addItemToCartHandler = (ev) => {
     ev.preventDefault();
     props.onClose();
 
-    const cartItem = {
-      pizzaToppings: pizzaToppingsCheckbox,
-      specialInstructions: specialInstructions,
-    };
-    cartCtx.addItem(cartItem);
+    const itemCategory = cartCtx.selectedMenuItem.category;
+    cartCtx.addItem(itemCategory);
   };
 
   return (
@@ -89,12 +72,11 @@ const ItemExtras = (props) => {
           <div className={classes.controls}>
             <ItemOptionsCategories
               onClick={pizzaToppingsHandler}
-              pizzaToppings={pizzaToppingsCheckbox}
               onPizzaSizeChange={pizzaSizeHandler}
               onSelectCheckbox={checkBoxHandler}
               onSelectCrust={pizzaCrustHandler}
             />
-            <ItemSpecialInstructions onTextInput={textInputHandler} />
+            <ItemSpecialInstructions onTextInput={sepcialInstructionsHandler} />
             <Input onAmountChange={itemAmountHandler} />
           </div>
           <div className={classes.actions}>

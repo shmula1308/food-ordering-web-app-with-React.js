@@ -4,16 +4,24 @@ import CartContext from "./cart-context";
 const defaultCartState = {
   items: [],
   selectedMenuItem: null,
-  itemBasePrice: null,
   extraCharges: 0,
   pizzaSize: "Small",
   pizzaCrust: "Thick",
   itemAmount: 1,
   priceTotal: null,
+  pizzaToppings: {
+    corn: false,
+    olives: false,
+    mozzarella: false,
+    mushrooms: false,
+    ham: false,
+    salami: false,
+  },
+  specialInstructionsText: null,
 };
 
 const cartReducer = (state, action) => {
-  if (action.type === "displayItem") {
+  if (action.type === "DISPLAYITEM") {
     return {
       ...state,
       selectedMenuItem: action.item,
@@ -22,9 +30,9 @@ const cartReducer = (state, action) => {
     };
   }
 
-  if (action.type === "extras") {
+  if (action.type === "EXTRAS") {
     const updatedExtraCharges = state.extraCharges + action.extraCharge;
-    const updatedPriceTotal = state.itemAmount * (state.itemBasePrice + updatedExtraCharges);
+    const updatedPriceTotal = state.itemAmount * (state.selectedMenuItem.price + updatedExtraCharges);
 
     return {
       ...state,
@@ -33,9 +41,9 @@ const cartReducer = (state, action) => {
     };
   }
 
-  if (action.type === "amount") {
+  if (action.type === "AMOUNT") {
     const updatedItemAmount = action.itemAmount;
-    const updatedPriceTotal = updatedItemAmount * (state.itemBasePrice + state.extraCharges);
+    const updatedPriceTotal = updatedItemAmount * (state.selectedMenuItem.price + state.extraCharges);
 
     return {
       ...state,
@@ -43,10 +51,10 @@ const cartReducer = (state, action) => {
       priceTotal: updatedPriceTotal,
     };
   }
-  if (action.type === "pizzaSize") {
+  if (action.type === "PIZZASIZE") {
     const updatedPizzaSize = action.pizzaSize;
     const updatedExtraCharges = updatedPizzaSize === "Large" ? 2 : 0;
-    const updatedPriceTotal = state.itemAmount * (state.itemBasePrice + updatedExtraCharges);
+    const updatedPriceTotal = state.itemAmount * (state.selectedMenuItem.price + updatedExtraCharges);
     return {
       ...state,
       pizzaSize: updatedPizzaSize,
@@ -62,26 +70,80 @@ const cartReducer = (state, action) => {
       pizzaCrust: updatedPizzaCrust,
     };
   }
-  if (action.type === "ADD") {
-    const specialInstructions = action.item.specialInstructions.trim();
-    const newCartItem = {
-      title: state.selectedMenuItem.title,
-      amount: state.itemAmount,
-      price: state.priceTotal.toFixed(2),
-      pizzaSize: state.pizzaSize,
-      pizzaCrust: state.pizzaCrust,
-      pizzaToppings: action.item.pizzaToppings,
-      specialInstructions: specialInstructions,
-    };
 
-    const updateCartItems = state.items.concat(newCartItem);
-    console.log(updateCartItems);
+  if (action.type === "TOPPING") {
+    const clickedTopping = action.pizzaTopping.toppingName;
+    const isSelected = action.pizzaTopping.isSelected;
+    return {
+      ...state,
+      pizzaToppings: {
+        ...state.pizzaToppings,
+        [clickedTopping]: isSelected,
+      },
+    };
+  }
+
+  if (action.type === "RESET") {
+    return {
+      ...state,
+      pizzaToppings: {
+        corn: false,
+        olives: false,
+        mozzarella: false,
+        mushrooms: false,
+        ham: false,
+        salami: false,
+      },
+    };
+  }
+
+  if (action.type === "NOTES") {
+    const specialInstructionsText = action.input.trim();
+
+    return {
+      ...state,
+      specialInstructions: specialInstructionsText,
+    };
+  }
+
+  if (action.type === "ADD") {
+    // const specialInstructions = action.item.specialInstructions.trim();
+    const itemCategory = action.itemCategory;
+    let newCartItem;
+    let updateCartItems;
+    if (itemCategory === "pizza") {
+      newCartItem = {
+        id: state.selectedMenuItem.id,
+        title: state.selectedMenuItem.title,
+        amount: state.itemAmount,
+        price: state.priceTotal.toFixed(2),
+        pizzaSize: state.pizzaSize,
+        pizzaCrust: state.pizzaCrust,
+        pizzaToppings: state.pizzaToppings,
+        specialInstructions: state.specialInstructions,
+        category: state.selectedMenuItem.category,
+      };
+
+      updateCartItems = state.items.concat(newCartItem);
+    }
+    if (itemCategory === "dessert") {
+      newCartItem = {
+        title: state.selectedMenuItem.title,
+        amount: state.itemAmount,
+        price: state.priceTotal.toFixed(2),
+        specialInstructions: state.specialInstructions,
+        category: state.selectedMenuItem.category,
+      };
+
+      updateCartItems = state.items.concat(newCartItem);
+    }
 
     return {
       ...state,
       items: updateCartItems,
     };
   }
+
   return defaultCartState;
 };
 
@@ -89,38 +151,53 @@ const CartProvider = (props) => {
   const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
 
   const displayItemExtrasHandler = (item) => {
-    dispatchCartAction({ type: "displayItem", item: item });
+    dispatchCartAction({ type: "DISPLAYITEM", item: item });
   };
 
   const itemExtrasHandler = (extraCharge) => {
     console.log(extraCharge);
-    dispatchCartAction({ type: "extras", extraCharge: extraCharge });
+    dispatchCartAction({ type: "EXTRAS", extraCharge: extraCharge });
   };
 
   const itemAmountHandler = (itemAmount) => {
-    dispatchCartAction({ type: "amount", itemAmount: itemAmount });
+    dispatchCartAction({ type: "AMOUNT", itemAmount: itemAmount });
   };
 
   const pizzaSizeHandler = (pizzaSize) => {
-    dispatchCartAction({ type: "pizzaSize", pizzaSize: pizzaSize });
+    dispatchCartAction({ type: "PIZZASIZE", pizzaSize: pizzaSize });
   };
   const pizzaCrustHandler = (crust) => {
     dispatchCartAction({ type: "CRUST", pizzaCrust: crust });
   };
 
-  const addItemToCartHandler = (item) => {
-    dispatchCartAction({ type: "ADD", item: item });
+  const pizzaToppingsHandler = (topping) => {
+    dispatchCartAction({ type: "TOPPING", pizzaTopping: topping });
+  };
+
+  const resetPizzaToppingsHandler = () => {
+    dispatchCartAction({ type: "RESET" });
+  };
+
+  const specialInstructionsHandler = (text) => {
+    dispatchCartAction({ type: "NOTES", input: text });
+  };
+
+  const addItemToCartHandler = (category) => {
+    dispatchCartAction({ type: "ADD", itemCategory: category });
   };
 
   const cartContext = {
     items: cartState.items,
     selectedMenuItem: cartState.selectedMenuItem,
-    itemBasePrice: cartState.itemBasePrice,
     priceTotal: cartState.priceTotal,
-    itemExtras: itemExtrasHandler,
     pizzaSize: cartState.pizzaSize,
+    pizzaToppings: cartState.pizzaToppings,
+    itemExtras: itemExtrasHandler,
     changePizzaSize: pizzaSizeHandler,
     changePizzaCrust: pizzaCrustHandler,
+    addPizzaToppings: pizzaToppingsHandler,
+    resetPizzaToppings: resetPizzaToppingsHandler,
+    addSpecialInstructions: specialInstructionsHandler,
     itemAmount: itemAmountHandler,
     displayItem: displayItemExtrasHandler,
     addItem: addItemToCartHandler,

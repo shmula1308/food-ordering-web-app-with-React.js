@@ -10,6 +10,8 @@ import classes from "./App.module.css";
 
 function App() {
   const [extrasIsShown, setExtrasIsShown] = useState(false);
+  const [cartIsShown, setcartIsShown] = useState(false);
+  const [menuIsShown, setMenuIsShown] = useState(true);
 
   const hideItemExtrasHandler = () => {
     setExtrasIsShown(false);
@@ -18,13 +20,18 @@ function App() {
     setExtrasIsShown(true);
   };
 
+  const showCartHandler = () => {
+    setcartIsShown(true);
+    setMenuIsShown(false);
+  };
+
   return (
     <CartProvider>
       <div className={classes.app}>
-        <Navigation />
+        <Navigation showCart={showCartHandler} />
         <Header image={headerImage} />
-        <Menu onShow={showItemExtrasHandler} />
-        <Cart />
+        {menuIsShown && <Menu onShow={showItemExtrasHandler} />}
+        {cartIsShown && <Cart />}
         {extrasIsShown && <ItemExtras onClose={hideItemExtrasHandler} />}
       </div>
     </CartProvider>

@@ -17,3 +17,10 @@
   color: #999999;
   cursor: pointer;
 }
+
+.item-extra {
+  display: block;
+  font-size: 0.8rem;
+  color: #808080;
+  margin-top: 0.4em;
+}

@@ -15,7 +15,6 @@ const ItemOptionsCategories = (props) => {
         <PizzaToppings
           selectedCheckBoxes={props.selectedCheckBoxes}
           onSelectCheckbox={props.onSelectCheckbox}
-          pizzaToppings={props.pizzaToppings}
           onClick={props.onClick}
         />
       )}

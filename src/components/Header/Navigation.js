@@ -8,8 +8,9 @@ import { useEffect, useState } from "react";
 const Navigation = (props) => {
   const [opaque, setOpaque] = useState(false);
   const cartCtx = useContext(CartContext);
-  const numberOfItemsInCart = cartCtx.items.length;
-  console.log(cartCtx.items);
+  const numberOfItemsInCart = cartCtx.items.reduce((a, b) => a + Number(b.amount), 0);
+  console.log(cartCtx);
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       setOpaque(window.pageYOffset > 200);
@@ -23,7 +24,7 @@ const Navigation = (props) => {
         <button className={classes.button}>
           <MdRestaurantMenu className={classes.icon} />
         </button>
-        <button className={classes.button}>
+        <button className={classes.button} onClick={props.showCart}>
           <span className={`${classes.badge} ${classes.bounceIn}`}>{numberOfItemsInCart}</span>
           <MdShoppingCart className={classes.icon} />
         </button>
