@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Modal from "../../UI/Modal";
 import ItemOptionsCategories from "./ItemOptionsCategories";
 import ItemSpecialInstructions from "./ItemSpecialInstructions";
@@ -11,12 +11,6 @@ import classes from "./ItemExtras.module.css";
 const ItemExtras = (props) => {
   const cartCtx = useContext(CartContext);
   const priceTotal = cartCtx.priceTotal;
-
-  const { pizzaSize, resetPizzaToppings } = cartCtx;
-
-  useEffect(() => {
-    resetPizzaToppings();
-  }, [pizzaSize]);
 
   const checkBoxHandler = (ev) => {
     let itemExtraPrice;

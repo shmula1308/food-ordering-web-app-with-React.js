@@ -33,7 +33,7 @@ const cartReducer = (state, action) => {
   if (action.type === "EXTRAS") {
     const updatedExtraCharges = state.extraCharges + action.extraCharge;
     const updatedPriceTotal = state.itemAmount * (state.selectedMenuItem.price + updatedExtraCharges);
-
+    updatedPriceTotal.toFixed(2);
     return {
       ...state,
       extraCharges: updatedExtraCharges,
@@ -44,7 +44,7 @@ const cartReducer = (state, action) => {
   if (action.type === "AMOUNT") {
     const updatedItemAmount = action.itemAmount;
     const updatedPriceTotal = updatedItemAmount * (state.selectedMenuItem.price + state.extraCharges);
-
+    updatedPriceTotal.toFixed(2);
     return {
       ...state,
       itemAmount: updatedItemAmount,
@@ -55,16 +55,24 @@ const cartReducer = (state, action) => {
     const updatedPizzaSize = action.pizzaSize;
     const updatedExtraCharges = updatedPizzaSize === "Large" ? 2 : 0;
     const updatedPriceTotal = state.itemAmount * (state.selectedMenuItem.price + updatedExtraCharges);
+    updatedPriceTotal.toFixed(2);
     return {
       ...state,
       pizzaSize: updatedPizzaSize,
       priceTotal: updatedPriceTotal,
       extraCharges: updatedExtraCharges,
+      pizzaToppings: {
+        corn: false,
+        olives: false,
+        mozzarella: false,
+        mushrooms: false,
+        ham: false,
+        salami: false,
+      },
     };
   }
   if (action.type === "CRUST") {
     const updatedPizzaCrust = action.pizzaCrust;
-    console.log(updatedPizzaCrust);
     return {
       ...state,
       pizzaCrust: updatedPizzaCrust,
@@ -79,20 +87,6 @@ const cartReducer = (state, action) => {
       pizzaToppings: {
         ...state.pizzaToppings,
         [clickedTopping]: isSelected,
-      },
-    };
-  }
-
-  if (action.type === "RESET") {
-    return {
-      ...state,
-      pizzaToppings: {
-        corn: false,
-        olives: false,
-        mozzarella: false,
-        mushrooms: false,
-        ham: false,
-        salami: false,
       },
     };
   }
@@ -174,10 +168,6 @@ const CartProvider = (props) => {
     dispatchCartAction({ type: "TOPPING", pizzaTopping: topping });
   };
 
-  const resetPizzaToppingsHandler = () => {
-    dispatchCartAction({ type: "RESET" });
-  };
-
   const specialInstructionsHandler = (text) => {
     dispatchCartAction({ type: "NOTES", input: text });
   };
@@ -196,7 +186,6 @@ const CartProvider = (props) => {
     changePizzaSize: pizzaSizeHandler,
     changePizzaCrust: pizzaCrustHandler,
     addPizzaToppings: pizzaToppingsHandler,
-    resetPizzaToppings: resetPizzaToppingsHandler,
     addSpecialInstructions: specialInstructionsHandler,
     itemAmount: itemAmountHandler,
     displayItem: displayItemExtrasHandler,

@@ -9,7 +9,7 @@ const Backdrop = (props) => {
 const ModalOverlay = (props) => {
   return (
     <div className={classes.modal}>
-      <div className={classes["remove-modal"]} onClick={props.onClick}>
+      <div className={classes["remove-modal-btn"]} onClick={props.onClick}>
         X
       </div>
       <div>{props.children}</div>

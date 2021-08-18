@@ -11,7 +11,7 @@ const DUMMY_DATA = [
     alt: "Delicious desserts",
     items: [
       {
-        id: "item1",
+        id: "s1-item1",
         thumbnail: "assets/Chocolate-Chip-Cookies.jpg",
         mediumSizeImage: "assets/Chocolate-Chip-Cookies-medium.jpeg",
         alt: "Chocolate Cookies on a table",
@@ -27,7 +27,7 @@ const DUMMY_DATA = [
         category: "dessert",
       },
       {
-        id: "item2",
+        id: "s1-item2",
         thumbnail: "assets/tiramisu.jpeg",
         mediumSizeImage: "assets/tiramisu-medium.jpeg",
         alt: "Tiramisu in a fluffy way",
@@ -43,7 +43,7 @@ const DUMMY_DATA = [
         category: "dessert",
       },
       {
-        id: "item3",
+        id: "s1-item3",
         thumbnail: "assets/lemon-creme-brulee.jpeg",
         mediumSizeImage: "assets/lemon-creme-brulee-medium.jpeg",
         alt: "Yellowish cremee brulee",
@@ -59,7 +59,7 @@ const DUMMY_DATA = [
         category: "dessert",
       },
       {
-        id: "item4",
+        id: "s1-item4",
         thumbnail: "assets/Scoops-kinds-ice-cream.jpeg",
         mediumSizeImage: "assets/Scoops-kinds-ice-cream-medium.jpeg",
         alt: "Red, yellow,pink ice cream scoops on a bowl",
@@ -84,7 +84,7 @@ const DUMMY_DATA = [
     alt: "Colorful pizzas",
     items: [
       {
-        id: "item1",
+        id: "s2-item1",
         thumbnail: "assets/pizza-margherita-thumbnail.jpg",
         mediumSizeImage: "assets/pizza-margherita-medium.jpg",
         alt: "Cheesy Margherita Pizza",
@@ -100,7 +100,7 @@ const DUMMY_DATA = [
         category: "pizza",
       },
       {
-        id: "item2",
+        id: "s2-item2",
         thumbnail: "assets/pizza-al-salame-thumbnail.jpg",
         mediumSizeImage: "assets/pizza-al-salame-medium.jpg",
         alt: "Crispy Pizza al salame",
@@ -116,7 +116,7 @@ const DUMMY_DATA = [
         category: "pizza",
       },
       {
-        id: "item3",
+        id: "s2-item3",
         thumbnail: "assets/pizza-capricciosa-thumbnail.jpg",
         mediumSizeImage: "assets/pizza-capricciosa-medium.jpg",
         alt: "Pizza capricciosa",
@@ -132,7 +132,7 @@ const DUMMY_DATA = [
         category: "pizza",
       },
       {
-        id: "item4",
+        id: "s2-item4",
         thumbnail: "assets/pizza-calzone-thumbnail.jpg",
         mediumSizeImage: "assets/pizza-calzone-medium.jpg",
         alt: "Folded pizza with crispy looking dough and basil leaves",
@@ -149,7 +149,7 @@ const DUMMY_DATA = [
         category: "pizza",
       },
       {
-        id: "item5",
+        id: "s2-item5",
         thumbnail: "assets/pizza-con-prosciutto-e-funghi-thumbnail.jpg",
         mediumSizeImage: "assets/pizza-con-prosciutto-e-funghi-medium.jpg",
         alt: "Pizza topped up with proscciuto and mushrroms",
