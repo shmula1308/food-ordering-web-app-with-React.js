@@ -33,7 +33,7 @@ const Navigation = (props) => {
     <nav className={`${classes.nav} ${opaque ? classes.opaque : ""}`}>
       <h1>Pizzeria Napoli</h1>
       <div className={classes.actions}>
-        <button className={classes.button}>
+        <button className={classes.button} onClick={props.showMenu}>
           <MdRestaurantMenu className={classes.icon} />
         </button>
         <button className={classes.button} onClick={props.showCart}>

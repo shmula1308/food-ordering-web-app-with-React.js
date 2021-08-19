@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-// import CartItemExtras from "./CartItemExtras";
 import classes from "./CartItem.module.css";
 
 const CartItem = (props) => {
@@ -29,22 +28,22 @@ const CartItem = (props) => {
     const extraToppingsLarge = (
       <Fragment>
         <span className={classes["item-extra"]}>
-          {props.toppings.corn && "Extra Toppings - L: Corn (+0.70)"}
+          {props.toppings.corn && "Extra Toppings - L: Corn (+1.20)"}
         </span>
         <span className={classes["item-extra"]}>
-          {props.toppings.olives && "Extra Toppings - L: Olives (+0.70)"}
+          {props.toppings.olives && "Extra Toppings - L: Olives (+1.20)"}
         </span>
         <span className={classes["item-extra"]}>
-          {props.toppings.mushrooms && "Extra Toppings - L: Mushrooms (+0.70)"}
+          {props.toppings.mushrooms && "Extra Toppings - L: Mushrooms (+1.20)"}
         </span>
         <span className={classes["item-extra"]}>
-          {props.toppings.mozzarella && "Extra Toppings - L: Mozzarella (+0.70)"}
+          {props.toppings.mozzarella && "Extra Toppings - L: Mozzarella (+1.20)"}
         </span>
         <span className={classes["item-extra"]}>
-          {props.toppings.ham && "Extra Toppings - L: Ham (+0.70)"}
+          {props.toppings.ham && "Extra Toppings - L: Ham (+1.20)"}
         </span>
         <span className={classes["item-extra"]}>
-          {props.toppings.salami && "Extra Toppings - L: Salami(+0.70)"}
+          {props.toppings.salami && "Extra Toppings - L: Salami (+1.20)"}
         </span>
       </Fragment>
     );
@@ -63,7 +62,9 @@ const CartItem = (props) => {
         </div>
         <div className={classes.group}>
           <span className={classes.price}>{props.price}</span>
-          <span className={classes.remove}>x</span>
+          <span className={classes.remove} onClick={props.onClick}>
+            x
+          </span>
         </div>
       </li>
     );
@@ -80,7 +81,9 @@ const CartItem = (props) => {
         </div>
         <div className={classes.group}>
           <span className={classes.price}>{props.price}</span>
-          <span className={classes.remove}>x</span>
+          <span className={classes.remove} onClick={props.onClick}>
+            x
+          </span>
         </div>
       </li>
     );

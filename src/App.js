@@ -14,21 +14,26 @@ function App() {
   const [menuIsShown, setMenuIsShown] = useState(true);
 
   const hideItemExtrasHandler = () => {
-    setExtrasIsShown(false);
+    setExtrasIsShown((prevState) => !prevState);
   };
   const showItemExtrasHandler = () => {
-    setExtrasIsShown(true);
+    setExtrasIsShown((prevState) => !prevState);
   };
 
   const showCartHandler = () => {
-    setcartIsShown(true);
-    setMenuIsShown(false);
+    setcartIsShown((prevState) => !prevState);
+    setMenuIsShown((prevState) => !prevState);
+  };
+
+  const hideCartHandler = () => {
+    setcartIsShown((prevState) => !prevState);
+    setMenuIsShown((prevState) => !prevState);
   };
 
   return (
     <CartProvider>
       <div className={classes.app}>
-        <Navigation showCart={showCartHandler} />
+        <Navigation showCart={showCartHandler} showMenu={hideCartHandler} />
         <Header image={headerImage} />
         {menuIsShown && <Menu onShow={showItemExtrasHandler} />}
         {cartIsShown && <Cart />}

@@ -10,7 +10,8 @@ const CartItems = (props) => {
     <ul className={classes["cart-items"]}>
       {cartCtx.items.map((item) => (
         <CartItem
-          key={(Math.random() * 100).toString()}
+          key={item.id}
+          onClick={cartCtx.removeItem.bind(null, item.id)}
           title={item.title}
           amount={item.amount}
           price={item.price}

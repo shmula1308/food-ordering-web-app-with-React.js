@@ -5,9 +5,10 @@ import classes from "./MenuCategory.module.css";
 
 const MenuCategory = (props) => {
   const { label, mainImage, alt, items, onShow, onDisplayItem, sectionId } = props;
+
   return (
     <div className={classes.category}>
-      <details>
+      <details onClick={props.openAllSections} open={props.isOpen}>
         <summary className={classes.label}>{label}</summary>
         <Header image={mainImage} alt={alt} />
         <ul className={classes.list}>

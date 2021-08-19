@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useCallback } from "react";
 import CartContext from "../../store/cart-context";
 import MenuCategory from "./MenuCategory";
 import classes from "./Menu.module.css";
@@ -170,11 +170,18 @@ const DUMMY_DATA = [
 
 const Menu = (props) => {
   const cartCtx = useContext(CartContext);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openAllSectionsHandler = (ev) => {
+    ev.preventDefault();
+    setIsOpen((prevState) => !prevState);
+  };
 
   const displayItemHandler = (sectionId, itemId) => {
     const category = DUMMY_DATA.filter((category) => category.sectionId === sectionId);
     const item = category[0].items.filter((item) => item.id === itemId)[0];
     cartCtx.displayItem(item);
+    setIsOpen((prevState) => !prevState);
   };
 
   return (
@@ -188,6 +195,8 @@ const Menu = (props) => {
           sectionId={section.sectionId}
           onShow={props.onShow}
           onDisplayItem={displayItemHandler}
+          isOpen={isOpen}
+          openAllSections={openAllSectionsHandler}
         />
       ))}
     </div>

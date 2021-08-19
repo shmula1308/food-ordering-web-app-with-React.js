@@ -1,4 +1,9 @@
 .category {
+  border-top: 1px solid lightgray;
+}
+
+.category:first-child {
+  border-top: none;
 }
 
 img {
@@ -8,6 +13,7 @@ img {
 .label {
   background-color: #f1f1f1;
   padding: 1.5em;
+  cursor: pointer;
 }
 
 .list {

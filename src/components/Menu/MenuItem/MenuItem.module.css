@@ -6,6 +6,10 @@
   cursor: pointer;
 }
 
+.item:last-child {
+  border-bottom: none;
+}
+
 .item:hover,
 .item:focus {
   background-color: #f1f1f1;

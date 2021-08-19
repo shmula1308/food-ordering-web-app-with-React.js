@@ -104,10 +104,10 @@ const cartReducer = (state, action) => {
     // const specialInstructions = action.item.specialInstructions.trim();
     const itemCategory = action.itemCategory;
     let newCartItem;
-    let updateCartItems;
+    let updatedCartItems;
     if (itemCategory === "pizza") {
       newCartItem = {
-        id: state.selectedMenuItem.id,
+        id: (Math.random() * 100).toString(),
         title: state.selectedMenuItem.title,
         amount: state.itemAmount,
         price: state.priceTotal.toFixed(2),
@@ -118,10 +118,11 @@ const cartReducer = (state, action) => {
         category: state.selectedMenuItem.category,
       };
 
-      updateCartItems = state.items.concat(newCartItem);
+      updatedCartItems = state.items.concat(newCartItem);
     }
     if (itemCategory === "dessert") {
       newCartItem = {
+        id: (Math.random() * 100).toString(),
         title: state.selectedMenuItem.title,
         amount: state.itemAmount,
         price: state.priceTotal.toFixed(2),
@@ -129,12 +130,21 @@ const cartReducer = (state, action) => {
         category: state.selectedMenuItem.category,
       };
 
-      updateCartItems = state.items.concat(newCartItem);
+      updatedCartItems = state.items.concat(newCartItem);
     }
 
     return {
       ...state,
-      items: updateCartItems,
+      items: updatedCartItems,
+    };
+  }
+
+  if (action.type === "REMOVE") {
+    const updatedCartItems = state.items.filter((item) => item.id !== action.id);
+
+    return {
+      ...state,
+      items: updatedCartItems,
     };
   }
 
@@ -176,6 +186,10 @@ const CartProvider = (props) => {
     dispatchCartAction({ type: "ADD", itemCategory: category });
   };
 
+  const removeItemFromCartHandler = (id) => {
+    dispatchCartAction({ type: "REMOVE", id: id });
+  };
+
   const cartContext = {
     items: cartState.items,
     selectedMenuItem: cartState.selectedMenuItem,
@@ -190,6 +204,7 @@ const CartProvider = (props) => {
     itemAmount: itemAmountHandler,
     displayItem: displayItemExtrasHandler,
     addItem: addItemToCartHandler,
+    removeItem: removeItemFromCartHandler,
   };
 
   return <CartContext.Provider value={cartContext}>{props.children}</CartContext.Provider>;
