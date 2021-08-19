@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import CartContext from "./store/cart-context";
 import Header from "./components/Header/Header";
 import Navigation from "./components/Header/Navigation";
 import Menu from "./components/Menu/Menu";
@@ -12,6 +13,11 @@ function App() {
   const [extrasIsShown, setExtrasIsShown] = useState(false);
   const [cartIsShown, setcartIsShown] = useState(false);
   const [menuIsShown, setMenuIsShown] = useState(true);
+  const cartCtx = useContext(CartContext);
+
+  useEffect(() => {
+    cartCtx.resetItemOptions();
+  }, [extrasIsShown]);
 
   const hideItemExtrasHandler = () => {
     setExtrasIsShown((prevState) => !prevState);
@@ -21,13 +27,13 @@ function App() {
   };
 
   const showCartHandler = () => {
-    setcartIsShown((prevState) => !prevState);
-    setMenuIsShown((prevState) => !prevState);
+    setcartIsShown(true);
+    setMenuIsShown(false);
   };
 
   const hideCartHandler = () => {
-    setcartIsShown((prevState) => !prevState);
-    setMenuIsShown((prevState) => !prevState);
+    setcartIsShown(false);
+    setMenuIsShown(true);
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback } from "react";
+import React, { useContext, useState } from "react";
 import CartContext from "../../store/cart-context";
 import MenuCategory from "./MenuCategory";
 import classes from "./Menu.module.css";

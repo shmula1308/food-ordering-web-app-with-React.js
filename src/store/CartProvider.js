@@ -148,6 +148,20 @@ const cartReducer = (state, action) => {
     };
   }
 
+  if (action.type === "RESET") {
+    return {
+      ...state,
+      pizzaToppings: {
+        corn: false,
+        olives: false,
+        mozzarella: false,
+        mushrooms: false,
+        ham: false,
+        salami: false,
+      },
+    };
+  }
+
   return defaultCartState;
 };
 
@@ -190,6 +204,10 @@ const CartProvider = (props) => {
     dispatchCartAction({ type: "REMOVE", id: id });
   };
 
+  const resetItemOptionsHandler = () => {
+    dispatchCartAction({ type: "RESET" });
+  };
+
   const cartContext = {
     items: cartState.items,
     selectedMenuItem: cartState.selectedMenuItem,
@@ -205,6 +223,7 @@ const CartProvider = (props) => {
     displayItem: displayItemExtrasHandler,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
+    resetItemOptions: resetItemOptionsHandler,
   };
 
   return <CartContext.Provider value={cartContext}>{props.children}</CartContext.Provider>;

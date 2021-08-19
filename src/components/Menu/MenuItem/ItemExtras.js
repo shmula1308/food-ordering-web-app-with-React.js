@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Modal from "../../UI/Modal";
 import ItemOptionsCategories from "./ItemOptionsCategories";
 import ItemSpecialInstructions from "./ItemSpecialInstructions";
@@ -10,7 +10,12 @@ import classes from "./ItemExtras.module.css";
 
 const ItemExtras = (props) => {
   const cartCtx = useContext(CartContext);
-  const priceTotal = cartCtx.priceTotal;
+
+  const { priceTotal, items } = cartCtx;
+
+  useEffect(() => {
+    cartCtx.resetItemOptions();
+  }, [items]);
 
   const checkBoxHandler = (ev) => {
     let itemExtraPrice;
