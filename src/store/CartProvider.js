@@ -149,6 +149,7 @@ const cartReducer = (state, action) => {
   }
 
   if (action.type === "RESET") {
+    console.log("reset");
     return {
       ...state,
       pizzaToppings: {
